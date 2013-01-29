@@ -12,9 +12,9 @@
 	<div class="container-narrow">
 		<div class="masthead">
 	        <ul class="nav nav-pills pull-right">
-	          <li class="active"><a href="index">List</a></li>
-	          <li><a href="new_">Comment</a></li>
-	          <li><a href="#">Contact</a></li>
+	          <li<?php if($masthead_css == 'list')echo ' class="active"' ?>><a href="index">List</a></li>
+	          <li<?php if($masthead_css == 'new')echo ' class="active"' ?>><a href="new_">Comment</a></li>
+	          <li<?php if($masthead_css == 'contact')echo ' class="active"' ?>><a href="#">Contact</a></li>
 	        </ul>
 	        <h3 class="muted">PHP Board</h3>
 	      </div>

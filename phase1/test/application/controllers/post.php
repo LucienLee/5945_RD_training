@@ -4,7 +4,7 @@ class Post extends CI_Controller {
     public function index()  
     {  
         $list = $this->PostModel->findAll();
-        $this->load->view('index', Array( "posts" => $list ));  
+        $this->load->view('index', Array( "posts" => $list, "masthead_css" => 'list' ));  
     }  
   
     public function new_(){
@@ -12,7 +12,7 @@ class Post extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->load->view('form');     
+        $this->load->view('form', Array( "masthead_css" => 'new') );     
     }  
 
     public function create(){
