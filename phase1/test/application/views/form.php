@@ -1,39 +1,25 @@
 <?php include('_site_header.php');?>
+<?php function sub_section(){ ?> 
+	<? die( var_dump($GLOBALS['category'])); ?>
+    <? _render_category($category); ?>
+<?php } ?>
+
 
 <?php echo validation_errors(); ?>
-<?php echo form_open('post/create'); ?>
+<?php echo form_open($form_action, array( 'class'=>'form-custom')); ?>
 
-<table>
-	<tr>
-		<td>名字</td>
-		<td>
-			<input type="text" name="name" value="<?php echo set_value('name'); ?>"/>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			信箱
-		</td>
-		<td>
-			<input type="email" name="email" value="<?php echo set_value('email'); ?>" />
-		</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>
-			留言內容
-		</td>
-		<td>
-			<textarea name="text" rows="4" value="<?php echo set_value('text'); ?>">
-			</textarea>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<input class="btn" type="submit" value="送出" />
-		</td>
-	</tr>
-</table>
+		<label class="control-label" for="name">名字</label>
+		<input type="text" name="name" id="name" value="<?php if( isset($post) ){ echo htmlspecialchars($post->UserName); }?>"/>
+		<label for="email">信箱</label>
+		<input type="email" name="email" id="email" value="<?php if( isset($post) ){echo htmlspecialchars($post->UserEmail); }?>" />
+		<label for="text">留言內容</label>
+		<textarea name="text" rows="4" id="text"><?php if( isset($post) ){ echo htmlspecialchars($post->Content); }?></textarea>
+		<br>
+	
+		<input class="btn" type="submit" value="送出" />
+		<input class="btn" type="<?php if(isset($post)){ 
+										'post/category'.$post->Category; 
+										}else{ $category->CategoryID; } ?>" value="取消" />
 </form>
 
 <?php include('_site_footer.php');?>

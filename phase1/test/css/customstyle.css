@@ -7,3 +7,13 @@
 .container-narrow > hr {
 	margin: 30px 0;
 }
+
+.form-custom{
+	height: 400px;
+	width: 320px;
+	padding: 10px 50px;
+	margin: 0 auto;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+

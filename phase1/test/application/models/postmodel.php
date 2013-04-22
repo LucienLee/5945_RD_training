@@ -8,28 +8,46 @@ class PostModel extends CI_Model {
     function findAll(){
     	return $this->db->get('5945Post')->result();
     }  
+
+    function find_by_id($postID){
+    	// $this->db->select("*");
+    	// $this->db->from('5945Post');
+    	// $this->db->where( 'PostID', $postID ); 
+    	// return $this->db->get();
+    	$query = $this->db->get_where('5945Post', array( 'PostID'=>$postID ) );
+    	if ( $query->num_rows() <= 0){  
+        	return null; 
+	    }  
+  
+    	return $query->row();
+    	
+    }
 	
-    function current_time(){
-    	return date('Y-m-d h:i:s');
+    function find_by_category($categoryID){
+    	$query = $this->db->get_where('5945Post', array( 'Category'=> $categoryID ) );
+		if ( $query->num_rows() <= 0){  
+        	return null; 
+	    }  
+    	return $query->result();
     }
 
-	function new_post(){
-		$this->load->helper('date');
-
-		$defaultCategory = 0;
-
-		$data = array(
-			'UserName' => $this->input->post('name'),
-			'UserEmail' => $this->input->post('email'),
-			'Content' => $this->input->post('text'),
-			'Category' => $defaultCategory,
-			'CreateDate' => $this->current_time(),
-			'ModifyDate' => $this->current_time()
-		);
-
-
-		// die(var_dump($data));
+	function new_post($data){
 		$this->db->insert('5945Post', $data);
 		return $this->db->insert_id();
 	}
+
+
+	function update_post($postID, $data){
+		$this->db->where( 'PostID', $postID);
+		$this->db->update( '5945Post',$data ); 
+
+	}
+
+	function delete_post($postID){
+		$this->db->where( array('PostID' => $postID));
+		$this->db->delete('5945Post');
+
+	}
+
+	
 }  
